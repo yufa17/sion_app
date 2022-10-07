@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sion_app/screen/playlist/sion_playlist.dart';
 import 'package:sion_app/screen/sion_profile.dart';
 import 'package:sion_app/screen/sion_unbording.dart';
 
@@ -18,6 +19,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const SionProfile());
+        home: const SionPlaylist());
   }
 }
