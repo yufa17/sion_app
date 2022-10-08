@@ -1,5 +1,6 @@
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
+import 'package:sion_app/screen/playlist/sion_playlist.dart';
 
 class SionAutoPlay extends StatefulWidget {
   final String judul, jam, pilihHari;
@@ -42,12 +43,13 @@ class _SionAutoPlayState extends State<SionAutoPlay> {
     return Stack(
       children: [
         Container(
-          padding: EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 20),
+          padding:
+              const EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 20),
           decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                     color: Colors.black,
                     offset: Offset(
@@ -62,9 +64,10 @@ class _SionAutoPlayState extends State<SionAutoPlay> {
             children: [
               Text(
                 widget.judul,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Text(
@@ -72,7 +75,7 @@ class _SionAutoPlayState extends State<SionAutoPlay> {
                 style: TextStyle(fontSize: 14),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 18,
               ),
               Column(
@@ -82,7 +85,7 @@ class _SionAutoPlayState extends State<SionAutoPlay> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Pilih Hari',
                         style: TextStyle(
                             fontSize: 20,
@@ -99,7 +102,7 @@ class _SionAutoPlayState extends State<SionAutoPlay> {
                           })
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Wrap(
@@ -132,7 +135,7 @@ class _SionAutoPlayState extends State<SionAutoPlay> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text(
+                    child: const Text(
                       "Tambah Waktu",
                       style: TextStyle(fontSize: 18, color: Colors.orange),
                     ),
@@ -147,9 +150,14 @@ class _SionAutoPlayState extends State<SionAutoPlay> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: Colors.orange),
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SionPlaylist(),
+                      ),
+                    );
                   },
-                  child: Text(
+                  child: const Text(
                     "Simpan",
                     style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
