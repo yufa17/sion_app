@@ -1,3 +1,4 @@
+import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 
 class SionAutoPlay extends StatefulWidget {
@@ -14,15 +15,17 @@ class SionAutoPlay extends StatefulWidget {
 }
 
 class _SionAutoPlayState extends State<SionAutoPlay> {
-  final List<String> namaHari = [
+  List<String> tags = [];
+  List<String> namaHari = [
     "M",
     "S",
-    "S",
+    "SE",
     "R",
     "K",
     "J",
-    "S",
+    "SA",
   ];
+  bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -39,9 +42,7 @@ class _SionAutoPlayState extends State<SionAutoPlay> {
     return Stack(
       children: [
         Container(
-          padding:
-              EdgeInsets.only(left: 20, top: 45 + 20, right: 20, bottom: 20),
-          margin: EdgeInsets.only(top: 45),
+          padding: EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 20),
           decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               color: Colors.white,
@@ -56,12 +57,12 @@ class _SionAutoPlayState extends State<SionAutoPlay> {
                     blurRadius: 10),
               ]),
           child: Column(
-            mainAxisSize: MainAxisSize.max,
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 widget.judul,
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
               ),
               SizedBox(
                 height: 15,
@@ -72,84 +73,55 @@ class _SionAutoPlayState extends State<SionAutoPlay> {
                 textAlign: TextAlign.center,
               ),
               SizedBox(
-                height: 22,
+                height: 18,
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Pilih Hari',
-                  ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CircleAvatar(
-                        radius: 15,
-                        child: Text(
-                          'M',
-                          style: TextStyle(color: Colors.black),
+                      Text(
+                        'Pilih Hari',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black),
+                      ),
+                      Switch(
+                          activeColor: Colors.orange,
+                          value: isSwitched,
+                          onChanged: (value) {
+                            setState(() {
+                              isSwitched = value;
+                            });
+                          })
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.start,
+                    children: [
+                      ChipsChoice<String>.multiple(
+                        value: tags,
+                        onChanged: (val) => setState(
+                          () => tags = val,
                         ),
-                        backgroundColor: Colors.white,
+                        choiceItems: C2Choice.listFrom<String, String>(
+                          source: namaHari,
+                          value: (i, v) => v,
+                          label: (i, v) => v,
+                        ),
                       ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      CircleAvatar(
-                        radius: 15,
-                        child: Text('S'),
-                      ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      CircleAvatar(
-                        radius: 15,
-                        child: Text('S'),
-                      ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      CircleAvatar(
-                        radius: 15,
-                        child: Text('R'),
-                      ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      CircleAvatar(
-                        radius: 15,
-                        child: Text('K'),
-                      ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      CircleAvatar(
-                        radius: 15,
-                        child: Text('J'),
-                      ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      CircleAvatar(
-                        radius: 15,
-                        child: Text('S'),
-                      ),
-                      // Container(
-                      //   height: 50,
-                      //   child: ListView.builder(
-                      //     itemCount: 7,
-                      //     itemBuilder: (BuildContext context, int index) {
-                      //       return CircleAvatar(
-                      //         child: Text(namaHari[index]),
-                      //       );
-                      //     },
-                      //   ),
-                      // )
                     ],
                   ),
                 ],
               ),
               const SizedBox(
-                height: 20.0,
+                height: 25.0,
               ),
               Align(
                 alignment: Alignment.center,
